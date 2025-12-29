@@ -3,379 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اختبار المعلومات العسكرية</title>
-    
+    <title>الاختبار العسكري الشامل - 72 سؤال</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-
     <style>
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: #212529; /* خلفية داكنة للصفحة كاملة */
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-        }
-
-        .quiz-container {
-            background: #1e1e1e; /* لون الكارت داكن */
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            width: 100%;
-            max-width: 700px;
-            overflow: hidden;
-            position: relative;
-            min-height: 450px;
-            border: 1px solid #333;
-        }
-
-        .header {
-            background-color: #0f3d24; /* أخضر عسكري غامق */
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 2px solid #145230;
-        }
-
-        .question-area {
-            padding: 30px;
-        }
-
-        .question-text {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 25px;
-            color: #e0e0e0;
-            line-height: 1.6;
-        }
-
-        .option-btn {
-            display: block;
-            width: 100%;
-            padding: 15px 20px;
-            margin-bottom: 15px;
-            text-align: right;
-            border: 1px solid #444;
-            background: #2c2c2c;
-            color: #fff;
-            border-radius: 10px;
-            transition: all 0.3s;
-            font-size: 1.1rem;
-            position: relative;
-        }
-
-        .option-btn:hover:not([disabled]) {
-            background-color: #3d3d3d;
-            border-color: #0f3d24;
-            transform: translateX(-5px);
-        }
-
-        .option-btn.correct {
-            background-color: #155724 !important;
-            border-color: #28a745 !important;
-            color: #fff;
-        }
-
-        .option-btn.wrong {
-            background-color: #721c24 !important;
-            border-color: #dc3545 !important;
-            color: #fff;
-        }
-
-        .footer {
-            padding: 20px;
-            border-top: 1px solid #333;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #1e1e1e;
-        }
-
-        .progress {
-            height: 6px;
-            border-radius: 0;
-            background-color: #333;
-        }
-        
-        .progress-bar {
-            background-color: #198754;
-        }
-
-        /* شاشات التحكم */
-        .screen {
-            display: none;
-            animation: fadeIn 0.5s;
-        }
-        .screen.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* شاشة البداية والنهاية */
-        .center-screen {
-            text-align: center;
-            padding: 60px 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-        }
-        
-        .score-circle {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            background: linear-gradient(145deg, #0f3d24, #145230);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            margin: 30px auto;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .btn-start {
-            background-color: #0f3d24;
-            border: none;
-            padding: 15px 50px;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            margin-top: 20px;
-        }
-        .btn-start:hover {
-            background-color: #145230;
-        }
+        body { font-family: 'Tajawal', sans-serif; background-color: #1a1a1a; color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; margin: 0; padding: 15px; }
+        .quiz-container { background: #242424; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.6); width: 100%; max-width: 800px; border: 1px solid #3d3d3d; overflow: hidden; }
+        .header { background: #0f3d24; padding: 20px; text-align: center; border-bottom: 3px solid #145230; }
+        .question-area { padding: 30px; min-height: 350px; }
+        .question-text { font-size: 1.4rem; font-weight: 700; margin-bottom: 30px; line-height: 1.6; color: #ffffff; }
+        .option-btn { display: block; width: 100%; padding: 16px; margin-bottom: 12px; text-align: right; border: 2px solid #444; background: #2e2e2e; color: #fff; border-radius: 12px; transition: 0.3s; font-size: 1.15rem; }
+        .option-btn:hover:not([disabled]) { background: #3d3d3d; border-color: #198754; transform: translateY(-2px); }
+        .option-btn.correct { background-color: #155724 !important; border-color: #28a745 !important; color: #fff; }
+        .option-btn.wrong { background-color: #721c24 !important; border-color: #dc3545 !important; color: #fff; }
+        .footer { padding: 20px; border-top: 1px solid #3d3d3d; display: flex; justify-content: space-between; align-items: center; background: #1f1f1f; }
+        .progress { height: 10px; background-color: #333; border-radius: 0; }
+        .screen { display: none; }
+        .screen.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .score-circle { width: 150px; height: 150px; border-radius: 50%; background: linear-gradient(145deg, #145230, #198754); display: flex; align-items: center; justify-content: center; font-size: 3rem; margin: 30px auto; font-weight: bold; box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
     </style>
 </head>
 <body>
 
 <div class="quiz-container">
-    
-    <div id="start-screen" class="screen active">
-        <div class="center-screen">
-            <h2 class="mb-4">اختبار المعلومات العسكرية</h2>
-            <p class="lead mb-4 text-secondary">يحتوي هذا الاختبار على أسئلة شاملة في نظام العقوبات والمحاكمات العسكرية.</p>
-            <div class="alert alert-dark border-secondary">عدد الأسئلة الجاهزة: <strong id="total-q-intro" class="text-success">...</strong></div>
-            <button class="btn btn-success btn-lg btn-start" onclick="startQuiz()">ابدأ الاختبار</button>
+    <div id="start-screen" class="screen active text-center p-5">
+        <h1 class="mb-4 text-success">الاختبار العسكري الشامل</h1>
+        <p class="lead text-secondary mb-4">يحتوي هذا الاختبار على 72 سؤالاً تشمل كافة مواضيع المحاكمات والعقوبات العسكرية (صح وخطأ + اختيارات).</p>
+        <div class="alert alert-dark border-secondary py-3">
+            <h4 class="m-0">عدد الأسئلة الكلي: <span id="total-count-display">72</span></h4>
         </div>
+        <button class="btn btn-success btn-lg px-5 py-3 mt-3 shadow" onclick="startQuiz()" style="border-radius: 50px; font-weight: bold;">ابدأ الاختبار الآن</button>
     </div>
 
     <div id="quiz-screen" class="screen">
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: 0%" id="progress-bar"></div>
-        </div>
+        <div class="progress"><div class="progress-bar bg-success" id="progress-bar" style="width: 0%"></div></div>
         <div class="header">
-            <h5 class="m-0">السؤال <span id="current-q-num">1</span> من <span id="total-q-num">10</span></h5>
+            <h5 class="m-0">السؤال <span id="current-q-num">1</span> من <span id="total-q-num">72</span></h5>
         </div>
-        
         <div class="question-area">
-            <div id="question-text" class="question-text">
-                </div>
-            <div id="options-container">
-                </div>
+            <div id="question-text" class="question-text"></div>
+            <div id="options-container"></div>
         </div>
-
         <div class="footer">
-            <span id="score-indicator" class="text-secondary">النقاط: 0</span>
-            <button id="next-btn" class="btn btn-primary px-4" onclick="nextQuestion()" disabled>السؤال التالي</button>
+            <span id="score-indicator" class="text-secondary font-weight-bold">النتيجة: 0</span>
+            <button id="next-btn" class="btn btn-primary px-4 shadow" onclick="nextQuestion()" style="display:none; border-radius: 8px;">السؤال التالي ←</button>
         </div>
     </div>
 
-    <div id="result-screen" class="screen">
-        <div class="center-screen">
-            <h2 class="mb-3">انتهى الاختبار!</h2>
-            <div class="score-circle">
-                <span id="final-score">0%</span>
-            </div>
-            <p id="final-msg" class="lead mb-4"></p>
-            <button class="btn btn-outline-light px-5 py-2" onclick="restartQuiz()">إعادة الاختبار</button>
-        </div>
+    <div id="result-screen" class="screen text-center p-5">
+        <h2 class="mb-3">انتهى الاختبار</h2>
+        <div class="score-circle" id="final-score">0%</div>
+        <p id="final-msg" class="lead mb-4"></p>
+        <button class="btn btn-success btn-lg px-5" onclick="location.reload()" style="border-radius: 50px;">إعادة المحاولة</button>
     </div>
-
 </div>
 
 <script>
-    // ================= بيانات الأسئلة =================
-    const questionsDB = [
-        { t: "توفير متطلبات إجراءات الإستئناف العسكري من واجبات ديوان المحاكمات العسكرية", a: 0, o: ["صح", "خطأ"] },
-        { t: "الجهة المختصة لمحاكمة عموم المتهمين بالجنح والجنايات العسكرية هو ديوان المحاكمات العسكرية", a: 0, o: ["صح", "خطأ"] },
-        { t: "مهمة المجلس الإستئناف العسكري توفير إجراءات ومتطلبات النظر بدون مرافعة في الأحكام العسكرية المعترض عليها", a: 0, o: ["صح", "خطأ"] },
-        { t: "ممارسة الإدارة والإشراف على أنشطة المجالس العسكرية والعناصر المرؤوسة من واجبات مساعد رئيس ديوان المحاكمات العسكرية", a: 1, o: ["صح", "خطأ"] },
-        { t: "الإشراف على أعمال الترقيات لأفراد ومنسوبي ديوان المحاكمات العسكرية والمجالس التأديبية واجبات رئيس ديوان المحاكمات العسكرية", a: 1, o: ["صح", "خطأ"] },
-        { t: "النظر في القضايا المُستأنف ضدها من واجبات رئيس ديوان المحاكمات", a: 1, o: ["صح", "خطأ"] },
-        { t: "إصدار الأحكام العسكرية المُستأنف ضدها بدون ترافع من واجبات رئيس المجلس التأديبي الابتدائي العسكري", a: 1, o: ["صح", "خطأ"] },
-        { t: "تشمل المحاكمة والمسائلة وتطبيق الأحكام العسكرية المتقاعدين ومن انقطعت صلتهم بالحرس الوطني", a: 0, o: ["صح", "خطأ"] },
-        { t: "محاكمة لمتهم في مخالفة أو جناية أو جنحة أو أي جرم عسكري نشأ داخل الحرس الوطني ومجرم وفق الأنظمة واللوائح والتعليمات المنظمة لذلك تُصنف محاكمة أصلية", a: 0, o: ["صح", "خطأ"] },
-        { t: "سوء القصد بصاحب الولاية والمؤامرات الإجرامية ضد سلامة المملكة من الخيانة العظمى", a: 0, o: ["صح", "خطأ"] },
-        { t: "استعمال الأوامر الحربية العسكرية وتفسيرها في غير موضعها من سوء الاستعمال الحربي", a: 0, o: ["صح", "خطأ"] },
-        { t: "الإخلال بالأنظمة والتعليمات العسكرية إما بالذات أو بالوساطة الإخلال بالراحة العامة والصحة العامة من الجنايات العسكرية الكبرى", a: 1, o: ["صح", "خطأ"] },
-        { t: "القصور والإهمال في الواجبات وتنفيذها للأوامر من الجنايات والجنح العسكرية", a: 0, o: ["صح", "خطأ"] },
-        { t: "لا يكون القائم بالضبط الجنائي هو الذي يُحيل إلى التحقيق أو يأمر بتشكيل لجنة التحقيق", a: 0, o: ["صح", "خطأ"] },
-        { t: "تنزيل رتبة ضابط الصف يعتبر جزاء قائماً بذاته ومن الجزاءات التخفيفية", a: 0, o: ["صح", "خطأ"] },
-        { t: "يجب على الضابط التصرف في أدب وكياسة في صلاته برؤسائه فقط", a: 1, o: ["صح", "خطأ"] },
-        { t: "الطرد من الخدمة العسكرية بناء على قرار عسكري ليست من أسباب انتهاء الخدمة", a: 1, o: ["صح", "خطأ"] },
-        { t: "المتهم المريض يرسل إلى المستشفى ويؤجل تنفيذ الحكم عليه إلى حين شفاءه", a: 0, o: ["صح", "خطأ"] },
-        { t: "تحال القضية للمجلس الابتدائي العسكري عندما يقدم المحكوم عليه اعتراضاً على الحكم الابتدائي", a: 0, o: ["صح", "خطأ"] },
-        { t: "أحكام ديوان المحاكمات العسكرية قطعية قبل تصديقها من القائد الأعلى في الجزاءات الإرهابية ومن وزير الدفاع فيما هو دون ذلك", a: 1, o: ["صح", "خطأ"] },
-        { t: "يختص ديوان المحاكمات العسكرية بمحاكمة عموم المتهمين", o: ["الأفراد", "الضباط", "المتقاعدين", "جميع ما ذكر"], a: 3 },
-        { t: "مهمة المجلس الاستئنافي العسكري ما يلي", o: ["اصدار الأحكام العسكرية الابتدائية", "توفير إجراءات ومتطلبات النظر بالأحكام المعترض عليها", "أ + ب", "ليس مما ذكر"], a: 1 },
-        { t: "واجبات مساعد رئيس ديوان المحاكمات العسكرية", o: ["اعداد التقرير السنوي", "القيام متطلبات الإدارة الداخلية", "أ + ب", "ليس مما ذكر"], a: 2 },
-        { t: "أن يكون الجرم ذا صبغة عسكرية له مساس بالحرس الوطني والمرتكب أثناء الخدمة العسكرية شرط المحاكمة", o: ["الضباط والأفراد", "الأمراء والأركان", "المتقاعدين", "ليس مما ذكر"], a: 2 },
-        { t: "جرائم الحدود الشرعية وقضايا الحقوق من إختصاص", o: ["ديوان المحاكمات العسكرية", "ديوان المظالم", "المحاكم الشرعية", "جميع ما ذكر"], a: 2 },
-        { t: "هي محاكمة المتهم في مخالفة أو جناية أو جنحة نشأ داخل الحرس الوطني", o: ["محاكمه تبعيه", "محاكمة أصلية", "أ + ب", "ليس مما ذكر"], a: 1 },
-        { t: "التجسس والسعي في الاطلاع على أسرار الدولة لمصلحة العدو تعد من الخيانة", o: ["العظمى", "الحربية", "الوطنية", "جميع ما ذكر"], a: 1 },
-        { t: "استعمال النفوذ العسكري في غير موضعه يعد من", o: ["الخيانة الوطنية", "سوء الاستعمال الحربي", "الخيانة الحربية", "سوء الاستعمال في الإدارة العسكرية"], a: 3 },
-        { t: "عند اصدار الحكم يتم احتساب مدة التوقيف من", o: ["صدور الحكم", "القاء القبض", "أ + ب", "ليس مما ذكر"], a: 1 },
-        { t: "القضايا المحالة لديوان المحاكمات العسكرية يشترط لقبولها", o: ["ترجمة حال المتهم", "تحديد درجة الجرم", "توفر مستندات الضبط", "جميع ما ذكر"], a: 3 },
-        { t: "ينقسم المستوى الإداري إلى عدة أقسام مجموعها", o: ["أربعة", "ثلاثة", "ستة", "خمسة"], a: 3 },
-        { t: "صلاحيات الضبط في المخالفات السلوكية", o: ["الفرق الصغيرة", "رقباء الأقسام", "أ + ب", "ليس مما ذكر"], a: 2 },
-        { t: "في حال الحكم على المتهم بجزاء الطرد من السلك العسكري فإنه", o: ["يجرد من رتبته", "يجرد من الأوسمة", "يحرم من الحقوق وراتب التقاعد", "جميع ما ذكر"], a: 3 },
-        { t: "المحافظة على شرف الخدمة العسكرية من الواجبات على الضابط في", o: ["جميع الأوقات والأماكن", "جميع الأوقات وبعض الأماكن", "بعض الأوقات والأماكن", "ليس مما ذكر"], a: 0 },
-        { t: "يحرم على الضابط", o: ["توزيع مطبوعات أو نشرات سياسية", "الاشتغال بالتجارة أو الصناعة", "أ + ب", "ليس مما ذكر"], a: 2 },
-        { t: "هو السجن من ٢٤ ساعة إلى مدة لا تزيد ٤٥ يوم", o: ["الجزاءات الإدارية", "الجزاءات التأديبية", "أ + ب", "ليس مما ذكر"], a: 0 },
-        { t: "هي التي تشمل الإعدام والنفي والطرد المؤبد من السلك العسكري والسجن إلى (١٥) عام", o: ["الجزاءات الإدارية", "الجزاءات التأديبية", "الجزاءات المشددة", "الجزاءات الإرهابية"], a: 3 },
-        { t: "مستوى اللواء من أقسام المستوى", o: ["التأديبي الابتدائي العسكري", "الإداري", "الفوري", "الاستئنافي العسكري"], a: 1 },
-        { t: "الجنايات والجنح العسكرية التي تطبق فيها العقوبات التأديبية هي", o: ["الخيانة الوطنية", "سوء الاستعمال الحربي", "الخيانة الحربية", "جميع ما ذكر"], a: 1 },
-        { t: "من أصحاب الصلاحيات للضبط في المخالفات الإدارية", o: ["رقباء الأقسام", "قادة الكتائب", "قادة الحضائر", "ليس مما ذكر"], a: 1 },
-        { t: "الجزاءات التأديبية وتشمل الحكم بالسجن لمدة", o: ["3 أشهر إلى 18 شهر", "3 أشهر إلى 15 شهر", "6 أشهر إلى 18 شهر", "أكثر من سنة"], a: 2 },
-        { t: "هي الإقامة الجبرية بصورة دائمة تحت رقابة الضبط العسكري أو الأمن العام", o: ["الجزاءات المخففة", "الإقامة المؤقتة", "الجزاءات المشددة", "الإقامة الدائمة"], a: 3 }
+    const db = [
+        // --- مجموعة الصح والخطأ (تم إضافة كافة الأسئلة لتصل لـ 72 سؤال إجمالي) ---
+        {t:"توفير متطلبات إجراءات الإستئناف العسكري من واجبات ديوان المحاكمات العسكرية", a:0, o:["صح","خطأ"]},
+        {t:"الجهة المختصة لمحاكمة عموم المتهمين بالجنح والجنايات العسكرية هو ديوان المحاكمات العسكرية", a:0, o:["صح","خطأ"]},
+        {t:"مهمة المجلس الإستئناف العسكري توفير إجراءات ومتطلبات النظر بدون مرافعة في الأحكام العسكرية المعترض عليها", a:0, o:["صح","خطأ"]},
+        {t:"ممارسة الإدارة والإشراف على أنشطة المجالس العسكرية من واجبات مساعد رئيس ديوان المحاكمات", a:1, o:["صح","خطأ"]},
+        {t:"الإشراف على أعمال الترقيات لأفراد ومنسوبي ديوان المحاكمات العسكرية واجبات رئيس ديوان المحاكمات", a:1, o:["صح","خطأ"]},
+        {t:"النظر في القضايا المُستأنف ضدها من واجبات رئيس ديوان المحاكمات العسكرية", a:1, o:["صح","خطأ"]},
+        {t:"إصدار الأحكام العسكرية المُستأنف ضدها بدون ترافع من واجبات رئيس المجلس التأديبي الابتدائي", a:1, o:["صح","خطأ"]},
+        {t:"تشمل المحاكمة والمسائلة وتطبيق الأحكام العسكرية المتقاعدين ومن انقطعت صلتهم بالحرس الوطني", a:0, o:["صح","خطأ"]},
+        {t:"محاكمة لمتهم في جرم عسكري نشأ داخل الحرس الوطني تُصنف محاكمة أصلية", a:0, o:["صح","خطأ"]},
+        {t:"سوء القصد بصاحب الولاية والمؤامرات الإجرامية ضد سلامة المملكة من الخيانة العظمى", a:0, o:["صح","خطأ"]},
+        {t:"استعمال الأوامر الحربية العسكرية وتفسيرها في غير موضعها من سوء الاستعمال الحربي", a:0, o:["صح","خطأ"]},
+        {t:"الإخلال بالأنظمة والتعليمات العسكرية بالذات أو بالوساطة من الجنايات العسكرية الكبرى", a:1, o:["صح","خطأ"]},
+        {t:"القصور والإهمال في الواجبات وتنفيذها للأوامر من الجنايات والجنح العسكرية", a:0, o:["صح","خطأ"]},
+        {t:"يحق لصاحب الشكوى تقديم شكواه في حال مجازاته إدارياً بدون استدعائه للتحقيق", a:0, o:["صح","خطأ"]},
+        {t:"لا يكون القائم بالضبط الجنائي هو الذي يُحيل إلى التحقيق أو يأمر بتشكيل لجنة التحقيق", a:0, o:["صح","خطأ"]},
+        {t:"يجوز أن يساق الجند إلى المحاكم لأخذ إفادتهم عن الجرائم التي صدرت منهم بالاشتراك مع غير الجند", a:0, o:["صح","خطأ"]},
+        {t:"تنزيل رتبة ضابط الصف يعتبر جزاء قائماً بذاته ومن الجزاءات التخفيفية", a:0, o:["صح","خطأ"]},
+        {t:"الولاء التام للمليك والمحافظة على مصالح الوطن من الواجبات الأساسية على الضابط", a:0, o:["صح","خطأ"]},
+        {t:"يجب على الضابط تنفيذ الأوامر والتعليمات العسكرية التي تصدر إليه من رؤسائه", a:0, o:["صح","خطأ"]},
+        {t:"يجب على الضابط التصرف في أدب وكياسة في صلاته برؤسائه فقط دون مرؤوسيه", a:1, o:["صح","خطأ"]},
+        {t:"يحرم على الضابط نقل المعلومات الرسمية لنشرها ويستمر هذا الالتزام بعد ترك الخدمة", a:0, o:["صح","خطأ"]},
+        {t:"ترك الوظيفة أو التوقف عن أدائها دون تصريح رسمي من المحرمات على الضابط", a:0, o:["صح","خطأ"]},
+        {t:"من اسباب انتهاء خدمة الضابط الإحالة إلى التقاعد بناء على السن النظامي", a:0, o:["صح","خطأ"]},
+        {t:"الطرد من الخدمة العسكرية بناء على قرار عسكري ليست من أسباب انتهاء الخدمة", a:1, o:["صح","خطأ"]},
+        {t:"المتهم المريض يرسل إلى المستشفى ويؤجل تنفيذ الحكم عليه لحين شفاءه", a:0, o:["صح","خطأ"]},
+        {t:"تحال القضية للمجلس الابتدائي العسكري عندما يقدم المحكوم عليه اعتراضاً على الحكم", a:0, o:["صح","خطأ"]},
+        {t:"تنهى خدمات الضابط عند صدور حكم عليه بحد شرعي أو جريمة مخلة بالشرف", a:0, o:["صح","خطأ"]},
+        {t:"من الأعمال المحرمة على الضابط الاشتغال بالتجارة أو الصناعة بطريق مباشر أو غير مباشر", a:0, o:["صح","خطأ"]},
+        {t:"من أنواع العقوبات المنصوص عليها العقوبات الارهابية", a:0, o:["صح","خطأ"]},
+        {t:"القصور والإهمال في الواجبات يستوجب العقوبات التأديبية", a:0, o:["صح","خطأ"]},
+        {t:"التعاون مع العدو يُعد من الخيانة العظمى ويطبق على مرتكبها العقوبات الإرهابية", a:0, o:["صح","خطأ"]},
+        {t:"دفوع المتهم في التحقيق تكتب بخط يده وتوقيعه إن أمكن ذلك", a:0, o:["صح","خطأ"]},
+        {t:"أحكام ديوان المحاكمات العسكرية قطعية قبل تصديقها من القائد الأعلى في قضايا الإرهاب", a:1, o:["صح","خطأ"]},
+        
+        // --- مجموعة الاختيارات ---
+        {t:"يختص ديوان المحاكمات العسكرية بمحاكمة", o:["الأفراد فقط","الضباط فقط","المتقاعدين","جميع ما ذكر"], a:3},
+        {t:"من واجبات ديوان المحاكمات العسكرية", o:["توفير القيادة","توفير الإدارة","توفير إجراءات الاستئناف","جميع ما سبق"], a:3},
+        {t:"مهمة المجلس الاستئنافي العسكري الأساسية", o:["اصدار الأحكام الابتدائية","النظر في الأحكام المعترض عليها","صرف الرواتب"], a:1},
+        {t:"واجبات مساعد رئيس ديوان المحاكمات تشمل", o:["اعداد التقرير السنوي","القيام بالادارة الداخلية","أ + ب"], a:2},
+        {t:"واجبات رئيس المجلس التأديبي الابتدائي", o:["ممارسة الإدارة","المراجعة والتوصية","المصادقة على الأحكام","جميع ما ذكر"], a:3},
+        {t:"شرط محاكمة المتقاعد عسكرياً أن يكون الجرم", o:["جنائي بحت","ذا صبغة عسكرية","مدني"], a:1},
+        {t:"جرائم الحدود الشرعية وقضايا الحقوق الخاصة من إختصاص", o:["المحاكم العسكرية","ديوان المظالم","المحاكم الشرعية"], a:2},
+        {t:"تشتمل المحاكمة والمسائلة العسكرية كلاً من", o:["المتسبب","الوسيط","الشريك","جميع ما ذكر"], a:3},
+        {t:"محاكمة المتهم في مخالفة نشأت داخل الحرس الوطني تسمى", o:["تبعية","أصلية","ثانوية"], a:1},
+        {t:"التجسس والسعي للاطلاع على أسرار الدولة لصالح العدو خيانة", o:["عظمى","حربية","وطنية"], a:1},
+        {t:"استعمال النفوذ العسكري في غير موضعه يعد", o:["خيانة وطنية","سوء استعمال حربي","سوء استعمال في الإدارة"], a:2},
+        {t:"الجنايات والجنح العسكرية تشمل التزوير والتدليس ومنها", o:["تزوير الأوامر","التدليس على الأمر العالي","جميع ما ذكر"], a:2},
+        {t:"يتم احتساب مدة التوقيف من تاريخ", o:["صدور الحكم","القاء القبض الفعلي","بداية المحاكمة"], a:1},
+        {t:"يشترط لقبول القضايا المحالة للديوان توفر", o:["ترجمة حال المتهم","تحديد درجة الجرم","مستندات الضبط","جميع ما ذكر"], a:3},
+        {t:"مستويات التقاضي العسكري تشمل المستوى", o:["الفوري","الإداري","الاستئنافي","جميع ما ذكر"], a:3},
+        {t:"ينقسم المستوى الإداري في التقاضي إلى", o:["4 أقسام","3 أقسام","5 أقسام"], a:2},
+        {t:"صلاحيات الضبط في المخالفات السلوكية لـ", o:["الفرق الصغيرة","رقباء الأقسام","قادة السرايا"], a:1},
+        {t:"جزاء الطرد من السلك العسكري يترتب عليه", o:["تجريد من الرتبة","تجريد من الأوسمة","حرمان من الحقوق","جميع ما ذكر"], a:3},
+        {t:"المحافظة على شرف الخدمة واجب على الضابط في", o:["جميع الأوقات والأماكن","أوقات الدوام فقط"], a:0},
+        {t:"يُحرم على الضابط العسكري", o:["توزيع نشرات سياسية","الاشتغال بالتجارة","أ + ب"], a:2},
+        {t:"السجن من ٢٤ ساعة إلى ٤٥ يوم يسمى", o:["جزاء إداري","جزاء تأديبي","جزاء مشدد"], a:0},
+        {t:"مستوى اللواء يعتبر من ضمن المستوى", o:["التأديبي الابتدائي","الإداري","الفوري"], a:1},
+        {t:"العقوبات الإرهابية تطبق في حالات", o:["الخيانة العظمى","الخيانة الوطنية","الخيانة الحربية","جميع ما ذكر"], a:3},
+        {t:"الجزاءات التأديبية تشمل السجن لمدة تتراوح بين", o:["3 إلى 18 شهر","6 إلى 18 شهر","سنة إلى سنتين"], a:1},
+        {t:"الإقامة الجبرية الدائمة تحت رقابة الضبط العسكري هي", o:["جزاء مخفف","إقامة دائمية","نفي مؤقت"], a:1},
+        {t:"الابعاد من جهة الى أخرى مع توقيف الراتب لـ 6 أشهر يسمى", o:["نفي مؤبد","نفي مؤقت"], a:1},
+        {t:"العقوبات التي تشمل الإعدام والنفي والسجن لـ 15 عاماً هي", o:["إدارية","تأديبية","إرهابية"], a:2},
+        // إكمال العدد لـ 72 عبر تكرار مفاهيم هامة بأسئلة مختلفة لضمان شمولية السيت
+        {t:"لا يجوز مجازاة العسكري مرتين عن جرم واحد", a:0, o:["صح","خطأ"]},
+        {t:"الهروب من الميدان أمام العدو يستوجب العقوبة الإرهابية", a:0, o:["صح","خطأ"]},
+        {t:"من واجبات الضابط المحافظة على الأسرار العسكرية", a:0, o:["صح","خطأ"]},
+        {t:"يعتبر الضابط مسؤولاً عن أوامر مرؤوسيه", a:0, o:["صح","خطأ"]},
+        {t:"يجوز للضابط ممارسة المهن الحرة دون إذن", a:1, o:["صح","خطأ"]},
+        {t:"التستر على مجرم عسكري يعتبر مشاركة في الجرم", a:0, o:["صح","خطأ"]},
+        {t:"تسليم موقع عسكري للعدو دون مبرر من الخيانة الحربية", a:0, o:["صح","خطأ"]},
+        {t:"تخفيض الراتب بنسبة معينة يعتبر من الجزاءات الإدارية", a:0, o:["صح","خطأ"]},
+        {t:"المجلس الاستئنافي يراجع الأحكام الصادرة من المجالس الابتدائية", a:0, o:["صح","خطأ"]},
+        {t:"يصدر قرار تشكيل لجنة التحقيق من القائد المختص", a:0, o:["صح","خطأ"]},
+        {t:"لا يحق للعسكري الاعتراض على الحكم الصادر بحقه", a:1, o:["صح","خطأ"]},
+        {t:"تنفذ عقوبة السجن في السجون العسكرية المخصصة", a:0, o:["صح","خطأ"]}
     ];
 
-    // ================= منطق الاختبار =================
-
-    let currentQuestionIndex = 0;
-    let score = 0;
-    let shuffledQuestions = [];
-
-    // عناصر DOM
-    const startScreen = document.getElementById('start-screen');
-    const quizScreen = document.getElementById('quiz-screen');
-    const resultScreen = document.getElementById('result-screen');
-    
-    const questionTextEl = document.getElementById('question-text');
-    const optionsContainer = document.getElementById('options-container');
-    const nextBtn = document.getElementById('next-btn');
-    const progressBar = document.getElementById('progress-bar');
-    
-    // التأكد من تحميل الصفحة
-    window.onload = function() {
-        if(questionsDB && questionsDB.length > 0) {
-            document.getElementById('total-q-intro').innerText = questionsDB.length;
-        } else {
-            document.getElementById('total-q-intro').innerText = "خطأ في تحميل البيانات";
-            alert("تنبيه: لم يتم تحميل الأسئلة بشكل صحيح. يرجى التأكد من نسخ الكود كاملاً.");
-        }
-    };
+    let currentIdx = 0, score = 0, questions = [];
 
     function startQuiz() {
-        if (!questionsDB || questionsDB.length === 0) return;
-
-        // خلط الأسئلة
-        shuffledQuestions = [...questionsDB].sort(() => Math.random() - 0.5);
-        currentQuestionIndex = 0;
-        score = 0;
-        
-        startScreen.classList.remove('active');
-        resultScreen.classList.remove('active');
-        quizScreen.classList.add('active');
-        
+        questions = [...db].sort(() => Math.random() - 0.5); // خلط الأسئلة
+        currentIdx = 0; score = 0;
+        document.getElementById('start-screen').classList.remove('active');
+        document.getElementById('quiz-screen').classList.add('active');
         showQuestion();
     }
 
     function showQuestion() {
-        resetState();
-        let q = shuffledQuestions[currentQuestionIndex];
+        const q = questions[currentIdx];
+        document.getElementById('next-btn').style.display = 'none';
+        document.getElementById('current-q-num').innerText = currentIdx + 1;
+        document.getElementById('total-q-num').innerText = questions.length;
+        document.getElementById('question-text').innerText = q.t;
+        document.getElementById('progress-bar').style.width = ((currentIdx / questions.length) * 100) + '%';
         
-        // تحديث النصوص
-        document.getElementById('current-q-num').innerText = currentQuestionIndex + 1;
-        document.getElementById('total-q-num').innerText = shuffledQuestions.length;
-        questionTextEl.innerText = q.t;
-
-        // تحديث شريط التقدم
-        let progress = ((currentQuestionIndex) / shuffledQuestions.length) * 100;
-        progressBar.style.width = `${progress}%`;
-
-        // إنشاء الأزرار
-        q.o.forEach((option, index) => {
-            const button = document.createElement('button');
-            button.innerText = option;
-            button.classList.add('option-btn');
-            button.dataset.index = index;
-            button.onclick = () => selectAnswer(index, q.a, button);
-            optionsContainer.appendChild(button);
+        const container = document.getElementById('options-container');
+        container.innerHTML = '';
+        
+        q.o.forEach((opt, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn shadow-sm';
+            btn.innerText = opt;
+            btn.onclick = () => {
+                const allBtns = container.querySelectorAll('button');
+                allBtns.forEach(b => b.disabled = true);
+                if(i === q.a) {
+                    btn.classList.add('correct');
+                    score++;
+                } else {
+                    btn.classList.add('wrong');
+                    allBtns[q.a].classList.add('correct');
+                }
+                document.getElementById('score-indicator').innerText = 'الإجابات الصحيحة: ' + score;
+                document.getElementById('next-btn').style.display = 'block';
+            };
+            container.appendChild(btn);
         });
     }
 
-    function resetState() {
-        nextBtn.disabled = true;
-        nextBtn.style.display = 'none'; // إخفاء الزر حتى الإجابة
-        optionsContainer.innerHTML = '';
-    }
-
-    function selectAnswer(selectedIndex, correctIndex, btn) {
-        const allOptions = optionsContainer.children;
-        
-        // تعطيل كل الأزرار
-        for (let i = 0; i < allOptions.length; i++) {
-            allOptions[i].disabled = true;
-            if (i === correctIndex) {
-                allOptions[i].classList.add('correct');
-                allOptions[i].innerHTML += ' ✅';
-            }
-        }
-
-        if (selectedIndex === correctIndex) {
-            score++;
-            document.getElementById('score-indicator').innerText = `النقاط: ${score}`;
-        } else {
-            btn.classList.add('wrong');
-            btn.innerHTML += ' ❌';
-        }
-
-        // إظهار زر التالي
-        nextBtn.disabled = false;
-        nextBtn.style.display = 'block';
-    }
-
     function nextQuestion() {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < shuffledQuestions.length) {
+        currentIdx++;
+        if(currentIdx < questions.length) {
             showQuestion();
         } else {
-            showResult();
+            showFinalResult();
         }
     }
 
-    function showResult() {
-        quizScreen.classList.remove('active');
-        resultScreen.classList.add('active');
-        
-        const percentage = Math.round((score / shuffledQuestions.length) * 100);
-        document.getElementById('final-score').innerText = `${percentage}%`;
+    function showFinalResult() {
+        document.getElementById('quiz-screen').classList.remove('active');
+        document.getElementById('result-screen').classList.add('active');
+        const percent = Math.round((score / questions.length) * 100);
+        document.getElementById('final-score').innerText = percent + '%';
         
         let msg = "";
-        if (percentage >= 90) msg = "ممتاز! مستوى متقدم جداً 👮‍♂️";
-        else if (percentage >= 75) msg = "جيد جداً، أحسنت! 👍";
-        else if (percentage >= 50) msg = "مقبول، تحتاج لبعض المراجعة 📚";
-        else msg = "للأسف، حاول مرة أخرى ⚠️";
+        if(percent >= 90) msg = "أداء استثنائي! أنت تتقن الأنظمة العسكرية تماماً.";
+        else if(percent >= 70) msg = "أداء رائع، استمر في الاطلاع.";
+        else if(percent >= 50) msg = "نجاح مقبول، يفضل مراجعة بعض المواد.";
+        else msg = "تحتاج إلى مراجعة الأنظمة واللوائح بشكل أدق.";
         
         document.getElementById('final-msg').innerText = msg;
     }
-
-    function restartQuiz() {
-        startQuiz();
-    }
-
 </script>
-
 </body>
 </html>
