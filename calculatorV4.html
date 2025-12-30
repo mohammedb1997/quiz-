@@ -1,427 +1,230 @@
 <!DOCTYPE html>
-
 <html lang="ar" dir="rtl">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>حاسبة درجات الدورة العسكرية</title>
-
-    <style>
-
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 20px; text-align: center; }
-
-        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-
-        h1 { color: #2c3e50; border-bottom: 2px solid #27ae60; padding-bottom: 10px; }
-
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-
-        th, td { padding: 12px; border: 1px solid #ddd; text-align: center; }
-
-        th { background-color: #27ae60; color: white; }
-
-        input[type="number"] { width: 100px; padding: 5px; border-radius: 4px; border: 1px solid #ccc; }
-
-        .result-box { margin-top: 30px; padding: 20px; background: #e8f5e9; border: 2px solid #27ae60; border-radius: 8px; }
-
-        .final-score { font-size: 24px; font-weight: bold; color: #1b5e20; }
-
-        button { background: #27ae60; color: white; border: none; padding: 15px 30px; font-size: 18px; border-radius: 5px; cursor: pointer; margin-top: 20px; }
-
-        button:hover { background: #219150; }
-
-        .error { border-color: #e74c3c !important; box-shadow: 0 0 6px rgba(231,76,60,0.3); }
-
-        .hint { color: #e74c3c; margin-top: 10px; display: none; }
-
-    </style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة درجات الدورة العسكرية</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 20px; text-align: center; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; border-bottom: 2px solid #27ae60; padding-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: center; }
+        th { background-color: #27ae60; color: white; }
+        input[type="number"] { width: 100px; padding: 5px; border-radius: 4px; border: 1px solid #ccc; }
+        .result-box { margin-top: 30px; padding: 20px; background: #e8f5e9; border: 2px solid #27ae60; border-radius: 8px; }
+        .final-score { font-size: 24px; font-weight: bold; color: #1b5e20; }
+        button { background: #27ae60; color: white; border: none; padding: 15px 30px; font-size: 18px; border-radius: 5px; cursor: pointer; margin-top: 20px; }
+        button:hover { background: #219150; }
+        .error { border-color: #e74c3c !important; box-shadow: 0 0 6px rgba(231,76,60,0.3); }
+        .hint { color: #e74c3c; margin-top: 10px; display: none; }
+    </style>
 </head>
-
 <body>
 
-
 <div class="container">
+    <h1>حاسبة معدل الدورة</h1>
+    <p>أدخل الدرجة من (100) لكل مادة أدناه:</p>
 
-    <h1>حاسبة معدل الدورة</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>اسم المادة</th>
+                <th>الوزن</th>
+                <th>درجتك (من 100)</th>
+            </tr>
+        </thead>
+        <tbody id="subjects-body"></tbody>
+    </table>
 
-    <p>أدخل الدرجة من (100) لكل مادة أدناه:</p>
+    <button onclick="calculateGPA()">احسب المعدل النهائي</button>
+    <button onclick="clearSaved()" style="background:#c0392b;">مسح جميع البيانات</button>
 
+    <div class="hint" id="hint-text">يرجى تصحيح الحقول المحددة باللون الأحمر ثم المحاولة مرة أخرى.</div>
 
-    <table>
-
-        <thead>
-
-            <tr>
-
-                <th>اسم المادة</th>
-
-                <th>الوزن</th>
-
-                <th>درجتك (من 100)</th>
-
-            </tr>
-
-        </thead>
-
-        <tbody id="subjects-body"></tbody>
-
-    </table>
-
-
-    <button onclick="calculateGPA()">احسب المعدل النهائي</button>
-
-    <button onclick="clearSaved()" style="background:#c0392b;">مسح جميع البيانات</button>
-
-
-    <div class="hint" id="hint-text">يرجى تصحيح الحقول المحددة باللون الأحمر ثم المحاولة مرة أخرى.</div>
-
-
-    <div class="result-box" id="result-area" style="display:none;">
-
-        <div>المعدل النهائي (النسبة المئوية):</div>
-
-        <div class="final-score" id="total-gpa">0%</div>
-
-        <div id="total-points"></div>
-
-    </div>
-
+    <div class="result-box" id="result-area" style="display:none;">
+        <div>المعدل النهائي (النسبة المئوية):</div>
+        <div class="final-score" id="total-gpa">0%</div>
+        <div id="total-points"></div>
+    </div>
 </div>
 
-
 <script>
-
-    const subjects = [
-
-        { name: "القيادة العسكرية", weight: 2 },
-
-        { name: "أساليب الاتصالات", weight: 4 },
-
-        { name: "قراءة الخارطة", weight: 2 },
-
-        { name: "الملاحة الأرضية (راجلاً)", weight: 4 },
-
-        { name: "الأمن والاستخبارات الفردية", weight: 3 },
-
-        { name: "الثقافة الإسلامية", weight: 3 },
-
-        { name: "التاريخ العسكري", weight: 2 },
-
-        { name: "هندسة القتال", weight: 2 },
-
-        { name: "الكيماوي", weight: 2 },
-
-        { name: "خدمات الإسناد", weight: 4 },
-
-        { name: "الإسعافات الأولية", weight: 1 },
-
-        { name: "المدفعية والدفاع الجوي", weight: 2 },
-
-        { name: "تطبيق العمليات", weight: 3 },
-
-        { name: "الأمن الداخلي", weight: 3 },
-
-        { name: "القنابل اليدوية", weight: 1 },
-
-        { name: "بندقية F2000", weight: 2 },
-
-        { name: "رشاش P90", weight: 2 },
-
-        { name: "المسدس", weight: 2 },
-
-        { name: "نشأة الإدارة", weight: 1 },
-
-        { name: "أعمال ومسؤوليات ركن الإدارة", weight: 2 },
-
-        { name: "الأنظمة واللوائح (ضباط وأفراد)", weight: 6 },
-
-        { name: "تنظيم الأفراد", weight: 3 },
-
-        { name: "إدارة شؤون الأفراد", weight: 5 },
-
-        { name: "الكتابة العسكرية", weight: 2 },
-
-        { name: "أعمال وتنظيم المكتب", weight: 1 },
-
-        { name: "الواجبات الإشرافية للركن", weight: 4 },
-
-        { name: "ويندوز", weight: 4 },
-
-        { name: "وورد", weight: 4 },
-
-        { name: "إكسل", weight: 4 },
-
-        { name: "بوربوينت", weight: 4 },
-
+    const subjects = [
+        { name: "القيادة العسكرية", weight: 2 },
+        { name: "أساليب الاتصالات", weight: 4 },
+        { name: "قراءة الخارطة", weight: 2 },
+        { name: "الملاحة الأرضية (راجلاً)", weight: 4 },
+        { name: "الأمن والاستخبارات الفردية", weight: 3 },
+        { name: "الثقافة الإسلامية", weight: 3 },
+        { name: "التاريخ العسكري", weight: 2 },
+        { name: "هندسة القتال", weight: 2 },
+        { name: "الكيماوي", weight: 2 },
+        { name: "خدمات الإسناد", weight: 4 },
+        { name: "الإسعافات الأولية", weight: 1 },
+        { name: "المدفعية والدفاع الجوي", weight: 2 },
+        { name: "تطبيق العمليات", weight: 3 },
+        { name: "الأمن الداخلي", weight: 3 },
+        { name: "القنابل اليدوية", weight: 1 },
+        { name: "بندقية F2000", weight: 2 },
+        { name: "رشاش P90", weight: 2 },
+        { name: "المسدس", weight: 2 },
+        { name: "نشأة الإدارة", weight: 1 },
+        { name: "أعمال ومسؤوليات ركن الإدارة", weight: 2 },
+        { name: "الأنظمة واللوائح (ضباط وأفراد)", weight: 6 },
+        { name: "تنظيم الأفراد", weight: 3 },
+        { name: "إدارة شؤون الأفراد", weight: 5 },
+        { name: "الكتابة العسكرية", weight: 2 },
+        { name: "أعمال وتنظيم المكتب", weight: 1 },
+        { name: "الواجبات الإشرافية للركن", weight: 4 },
+        { name: "ويندوز", weight: 4 },
+        { name: "وورد", weight: 4 },
+        { name: "إكسل", weight: 4 },
+        { name: "بوربوينت", weight: 4 },
 { name: "المحاكمات", weight: 3 }
-
-    ];
-
-
-    const optionalSubjects = [
-
-        { name: "الرياضة واللياقة", weight: 4 },
-
-        { name: "تمرين الأركان", weight: 2 },
-
-        { name: "السلوك", weight: 4 },
-
-        { name: "المواظبة", weight: 4 }
-
-    ];
-
-
-    const tableBody = document.getElementById('subjects-body');
-
-
-    subjects.forEach((sub, index) => {
-
-        const row = `<tr>
-
-            <td style="text-align:right;padding-right:10px">${sub.name}</td>
-
-            <td>${sub.weight}</td>
-
-            <td><input type="number" id="grade-${index}" min="0" max="100" placeholder="مثال: 85"></td>
-
-        </tr>`;
-
-        tableBody.innerHTML += row;
-
-    });
-
-
-    optionalSubjects.forEach((sub, index) => {
-
-        const row = `<tr>
-
-            <td style="text-align:right;padding-right:10px">${sub.name} (اختياري)</td>
-
-            <td>${sub.weight}</td>
-
-            <td><input type="number" id="opt-${index}" min="0" max="100" placeholder="اختياري"></td>
-
-        </tr>`;
-
-        tableBody.innerHTML += row;
-
-    });
-
-
-    function calculateGPA() {
-
-        document.getElementById('hint-text').style.display = 'none';
-
-        document.getElementById('result-area').style.display = 'none';
-
-
-        subjects.forEach((_, i) => {
-
-            document.getElementById(`grade-${i}`).classList.remove('error');
-
-        });
-
-
-        const missing = [];
-
-        const invalid = [];
-
-
-        subjects.forEach((sub, index) => {
-
-            const el = document.getElementById(`grade-${index}`);
-
-            const val = el.value.trim();
-
-
-            if (val === "") {
-
-                missing.push(sub.name);
-
-                el.classList.add('error');
-
-            } else if (isNaN(val) || val < 0 || val > 100) {
-
-                invalid.push(sub.name);
-
-                el.classList.add('error');
-
-            }
-
-        });
-
-
-        if (missing.length || invalid.length) {
-
-            let msg = "";
-
-            if (missing.length) msg += "حقول فارغة:\n" + missing.join("\n") + "\n\n";
-
-            if (invalid.length) msg += "قيم غير صحيحة (0 - 100):\n" + invalid.join("\n");
-
-            alert(msg);
-
-            document.getElementById('hint-text').style.display = 'block';
-
-            return;
-
-        }
-
-
-        let totalWeighted = 0;
-
-        let totalWeights = 0;
-
-
-        subjects.forEach((sub, index) => {
-
-            const grade = parseFloat(document.getElementById(`grade-${index}`).value);
-
-            totalWeighted += grade * sub.weight;
-
-            totalWeights += sub.weight;
-
-        });
-
-
-        optionalSubjects.forEach((sub, index) => {
-
-            const el = document.getElementById(`opt-${index}`);
-
-            const val = el.value.trim();
-
-
-            if (val !== "" && !isNaN(val) && val >= 0 && val <= 100) {
-
-                const grade = parseFloat(val);
-
-                totalWeighted += grade * sub.weight;
-
-                totalWeights += sub.weight;
-
-            }
-
-        });
-
-
-        const finalGPA = totalWeighted / totalWeights;
-
-
-        localStorage.setItem("finalGPA", finalGPA.toFixed(2));
-
-        localStorage.setItem("totalPoints", totalWeighted.toFixed(2));
-
-
-        let gradesArray = [];
-
-        subjects.forEach((sub, index) => {
-
-            gradesArray.push(document.getElementById(`grade-${index}`).value);
-
-        });
-
-        localStorage.setItem("savedGrades", JSON.stringify(gradesArray));
-
-
-        let optionalGrades = [];
-
-        optionalSubjects.forEach((sub, index) => {
-
-            optionalGrades.push(document.getElementById(`opt-${index}`).value);
-
-        });
-
-        localStorage.setItem("optionalGrades", JSON.stringify(optionalGrades));
-
-
-        document.getElementById('result-area').style.display = 'block';
-
-        document.getElementById('total-gpa').innerText = finalGPA.toFixed(2) + "%";
-
-        document.getElementById('total-points').innerText =
-
-            "مجموع النقاط الموزونة: " + totalWeighted.toFixed(2);
-
-    }
-
-
-    window.onload = function() {
-
-        const savedGPA = localStorage.getItem("finalGPA");
-
-        const savedPoints = localStorage.getItem("totalPoints");
-
-        const savedGrades = JSON.parse(localStorage.getItem("savedGrades") || "[]");
-
-        const savedOptional = JSON.parse(localStorage.getItem("optionalGrades") || "[]");
-
-
-        if (savedGrades.length > 0) {
-
-            savedGrades.forEach((grade, index) => {
-
-                const input = document.getElementById(`grade-${index}`);
-
-                if (input) input.value = grade;
-
-            });
-
-        }
-
-
-        if (savedOptional.length > 0) {
-
-            savedOptional.forEach((grade, index) => {
-
-                const input = document.getElementById(`opt-${index}`);
-
-                if (input) input.value = grade;
-
-            });
-
-        }
-
-
-        if (savedGPA && savedPoints) {
-
-            document.getElementById('result-area').style.display = 'block';
-
-            document.getElementById('total-gpa').innerText = savedGPA + "%";
-
-            document.getElementById('total-points').innerText =
-
-                "مجموع النقاط الموزونة: " + savedPoints;
-
-        }
-
-    };
-
-
-    function clearSaved() {
-
-        localStorage.removeItem("finalGPA");
-
-        localStorage.removeItem("totalPoints");
-
-        localStorage.removeItem("savedGrades");
-
-        localStorage.removeItem("optionalGrades");
-
-        alert("تم مسح جميع البيانات المحفوظة");
-
-        location.reload();
-
-    }
-
+    ];
+
+    const optionalSubjects = [
+        { name: "الرياضة واللياقة", weight: 4 },
+        { name: "تمرين الأركان", weight: 2 },
+        { name: "السلوك", weight: 4 },
+        { name: "المواظبة", weight: 4 }
+    ];
+
+    const tableBody = document.getElementById('subjects-body');
+
+    subjects.forEach((sub, index) => {
+        const row = `<tr>
+            <td style="text-align:right;padding-right:10px">${sub.name}</td>
+            <td>${sub.weight}</td>
+            <td><input type="number" id="grade-${index}" min="0" max="100" placeholder="مثال: 85"></td>
+        </tr>`;
+        tableBody.innerHTML += row;
+    });
+
+    optionalSubjects.forEach((sub, index) => {
+        const row = `<tr>
+            <td style="text-align:right;padding-right:10px">${sub.name} (اختياري)</td>
+            <td>${sub.weight}</td>
+            <td><input type="number" id="opt-${index}" min="0" max="100" placeholder="اختياري"></td>
+        </tr>`;
+        tableBody.innerHTML += row;
+    });
+
+    function calculateGPA() {
+        document.getElementById('hint-text').style.display = 'none';
+        document.getElementById('result-area').style.display = 'none';
+
+        subjects.forEach((_, i) => {
+            document.getElementById(`grade-${i}`).classList.remove('error');
+        });
+
+        const missing = [];
+        const invalid = [];
+
+        subjects.forEach((sub, index) => {
+            const el = document.getElementById(`grade-${index}`);
+            const val = el.value.trim();
+
+            if (val === "") {
+                missing.push(sub.name);
+                el.classList.add('error');
+            } else if (isNaN(val) || val < 0 || val > 100) {
+                invalid.push(sub.name);
+                el.classList.add('error');
+            }
+        });
+
+        if (missing.length || invalid.length) {
+            let msg = "";
+            if (missing.length) msg += "حقول فارغة:\n" + missing.join("\n") + "\n\n";
+            if (invalid.length) msg += "قيم غير صحيحة (0 - 100):\n" + invalid.join("\n");
+            alert(msg);
+            document.getElementById('hint-text').style.display = 'block';
+            return;
+        }
+
+        let totalWeighted = 0;
+        let totalWeights = 0;
+
+        subjects.forEach((sub, index) => {
+            const grade = parseFloat(document.getElementById(`grade-${index}`).value);
+            totalWeighted += grade * sub.weight;
+            totalWeights += sub.weight;
+        });
+
+        optionalSubjects.forEach((sub, index) => {
+            const el = document.getElementById(`opt-${index}`);
+            const val = el.value.trim();
+
+            if (val !== "" && !isNaN(val) && val >= 0 && val <= 100) {
+                const grade = parseFloat(val);
+                totalWeighted += grade * sub.weight;
+                totalWeights += sub.weight;
+            }
+        });
+
+        const finalGPA = totalWeighted / totalWeights;
+
+        localStorage.setItem("finalGPA", finalGPA.toFixed(2));
+        localStorage.setItem("totalPoints", totalWeighted.toFixed(2));
+
+        let gradesArray = [];
+        subjects.forEach((sub, index) => {
+            gradesArray.push(document.getElementById(`grade-${index}`).value);
+        });
+        localStorage.setItem("savedGrades", JSON.stringify(gradesArray));
+
+        let optionalGrades = [];
+        optionalSubjects.forEach((sub, index) => {
+            optionalGrades.push(document.getElementById(`opt-${index}`).value);
+        });
+        localStorage.setItem("optionalGrades", JSON.stringify(optionalGrades));
+
+        document.getElementById('result-area').style.display = 'block';
+        document.getElementById('total-gpa').innerText = finalGPA.toFixed(2) + "%";
+        document.getElementById('total-points').innerText =
+            "مجموع النقاط الموزونة: " + totalWeighted.toFixed(2);
+    }
+
+    window.onload = function() {
+        const savedGPA = localStorage.getItem("finalGPA");
+        const savedPoints = localStorage.getItem("totalPoints");
+        const savedGrades = JSON.parse(localStorage.getItem("savedGrades") || "[]");
+        const savedOptional = JSON.parse(localStorage.getItem("optionalGrades") || "[]");
+
+        if (savedGrades.length > 0) {
+            savedGrades.forEach((grade, index) => {
+                const input = document.getElementById(`grade-${index}`);
+                if (input) input.value = grade;
+            });
+        }
+
+        if (savedOptional.length > 0) {
+            savedOptional.forEach((grade, index) => {
+                const input = document.getElementById(`opt-${index}`);
+                if (input) input.value = grade;
+            });
+        }
+
+        if (savedGPA && savedPoints) {
+            document.getElementById('result-area').style.display = 'block';
+            document.getElementById('total-gpa').innerText = savedGPA + "%";
+            document.getElementById('total-points').innerText =
+                "مجموع النقاط الموزونة: " + savedPoints;
+        }
+    };
+
+    function clearSaved() {
+        localStorage.removeItem("finalGPA");
+        localStorage.removeItem("totalPoints");
+        localStorage.removeItem("savedGrades");
+        localStorage.removeItem("optionalGrades");
+        alert("تم مسح جميع البيانات المحفوظة");
+        location.reload();
+    }
 </script>
-
 
 </body>
 
 </html>
-
